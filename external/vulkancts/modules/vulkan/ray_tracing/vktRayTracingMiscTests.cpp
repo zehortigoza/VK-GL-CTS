@@ -8077,11 +8077,12 @@ de::MovePtr<BufferWithMemory> RayTracingMiscTestInstance::runTest(void)
     {
         const auto resultBufferCreateInfo = makeBufferCreateInfo(
             resultBufferSize, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT);
-        const auto resultBufferDataVec = m_testPtr->getResultBufferStartData();
-
+        printf("before resultBufferPtr new BufferWithMemory()\n");
         resultBufferPtr = de::MovePtr<BufferWithMemory>(new BufferWithMemory(
             deviceInterface, deviceVk, allocator, resultBufferCreateInfo, MemoryRequirement::HostVisible));
+        printf("after resultBufferPtr new BufferWithMemory()\n");
 
+        const auto resultBufferDataVec = m_testPtr->getResultBufferStartData();
         if (resultBufferDataVec.size() > 0)
         {
             DE_ASSERT(static_cast<uint32_t>(resultBufferDataVec.size()) == resultBufferSize);
